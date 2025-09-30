@@ -1,0 +1,143 @@
+{#ceci est un commentaire !!
+
+<h1>{{ title }}</h1>
+
+<p>Élément : {{ T["i"] }}</p>
+
+{% set tableau =[1,2,3] %}
+<p>Tableau : {{ tableau[0] }}, {{ tableau[1] }}, {{ tableau[2] }}</p>
+
+{% set tableau ={'key1': 'value1' , 'key2': 'value2'} %}
+{{ tableau['key1'] }}%}
+
+{% set foo, bar = 'foo', 'bar' %}
+{{foo}}
+
+{% set foo %}<div id="pagination">Contenu paginé</div>{% endset %}
+{{ foo|raw }}
+
+{% set produit = {'description': 'Téléphone 5G'} %}
+<p>{{ "Description du produit:" ~ produit.description }}</p>
+
+{% set produits = [] %} <!-- Tableau vide -->
+{% if produits is empty %}
+    <p>Il n'y a plus de produit</p>
+{% endif %}
+
+{% set a = 1 %}
+{% set b = 2 %}
+{% set c = 3 %}
+{% set d = 4 %}
+{% if (a == 1 and b > 0) or not c == 0 and d is defined %}
+    {% set resultat = (d + a * b) / c %}
+    <p>Résultat : {{ resultat }}</p>
+{% endif %}
+
+{% if 5 not in [1, 2, 3] %}
+    <p>5 non présent</p>
+{% endif %}
+
+{% set hour = 00 %} <!-- Change cette valeur pour tester -->
+{% if hour < 12 %}
+    <p>Bonjour !</p>
+{% elseif hour < 18 %}
+    <p>Bon après-midi!</p>
+{% else %}
+    <p>Bonsoir !</p>
+{% endif %}
+
+{% set nombre = 4 %}
+{% if nombre is odd %}
+    <p>{{ nombre }} est pair</p>
+{% endif %}
+{% if nombre is divisible by(4) %}
+    <p>{{ nombre }} est divisible par 4</p>
+{% endif %}
+
+{% set produits = ['Téléphone', 'Ordinateur', 'Tablette'] %}
+<ul>
+{% for produit in produits %}
+    <li>{{ produit }}</li>
+{% endfor %}
+</ul>
+
+{% set produits = ['Téléphone', 'Ordinateur', 'Tablette'] %}
+<ul>
+{% for i, produit in produits %}
+    <li>{{ i }}: {{ produit }}</li>
+{% endfor %}
+</ul>
+
+{% set produits = {'p1': 'Téléphone', 'p2': 'Ordinateur', 'p3': 'Tablette'} %}
+<ul>
+{% for key, value in produits %}
+    <li>{{ key }}: {{ value }}</li>
+{% endfor %}
+</ul>
+
+{% set produits = ['Téléphone', 'Ordinateur', 'Tablette'] %}
+<ul>
+{% for produit in produits %}
+    <li>
+    {{ loop.index }} - {{ produit }} 
+    {% if loop.first %} 
+        (Premier !)
+    {% endif %} 
+    {% if loop.last %} 
+        (Dernier !) 
+    {% endif %}
+    </li>
+{% endfor %}
+</ul>
+
+{% set produits = ['Téléphone', 'Ordinateur', 'Tablette'] %}
+<ul>
+{% for produit in produits %}
+    {% if produit starts with 'T' %}
+        <li>{{ produit }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+{% set texte = 'bonjour' %}
+{% set liste = [1, 2, 3] %}
+<p>Longueur de "{{ texte }}" : {{ texte|length }}</p>
+<p>Longueur de la liste : {{ liste|length }}</p>
+
+{% set liste = ['pomme', 'banane', 'orange'] %}
+{% set texte = 'bonjour' %}
+<p>Premier fruit : {{ liste|first }}</p>
+<p>Premier caractère : {{ texte|first }}</p> <!-- tu peut mettre le filtre |last -->
+
+{% set texte = 'J’aime le café' %}
+<p>{{ texte|replace({'café': 'thé'}) }}</p>
+
+
+{% set date = "today" %}
+<p>Date : {{ date|date('d/m/Y H:i') }}</p>
+
+<a href="{{path('authors_list')}}">lien1</a>
+<a href="{{url('authors_list')}}">lien2</a>
+
+<a href="{{ path('app_produit', {'id': 1}) }}">Voir le produit</a> 
+Résultat attendu : Génère un lien comme <a href="/produit/1">Voir le produit</a> (le domaine dépend du serveur).
+
+Génère une URL relative basée sur une route définie dans ton application (ex. : dans les fichiers de configuration de Symfony). Elle ne contient pas le domaine (ex. : http://monsite.com), juste le chemin (ex. : /produit/1).
+Quand l’utiliser : Idéal pour les liens internes sur une même application, sans spécifier le domaine
+Génère une URL absolue, incluant le domaine complet (ex. : http://monsite.com/produit/1). Elle utilise aussi une route définie, mais ajoute le protocole (http/https) et le nom de domaine.
+Quand l’utiliser : Utile pour des liens partagés en dehors du site (ex. : emails, API) où le domaine complet est nécessaire.
+
+
+<img src="{{asset('assets/images/image.png')}}">#}
+<!--on peut aussi mettre <script src="{{asset()}}> pour generer des chemins appropries pour les fichies ressources statiques-->
+
+
+
+
+
+
+
+
+
+
+

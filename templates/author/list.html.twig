@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1>Liste des auteurs</h1>
+    <p> le nombre total d'auteur : {{authors|length}}</p>
+    <p>Nombre total de livres : {{ authors|reduce((sum, author) => sum + author.nb_books, 0) }}</p>
 
     {% if authors is not defined or authors is empty %}
         <p>Aucun auteur trouvé.</p>
@@ -20,13 +22,16 @@
             <tbody>
                 {% for author in authors %}
                     <tr>
+                        <td><a href="{{ path('author_details', {'id': author.id}) }}">details</a></td>
                         <td><img src="{{ asset(author.picture) }}" alt="{{ author.username }}" width="100"></td>
-                        <td>{{ author.username|upper }}</td>   {# Noms en majuscules #}
+                        <td>{{ author.username|upper }}</td>   
                         <td>{{ author.email }}</td>
                         <td>{{ author.nb_books }}</td>
                     </tr>
+                    
                 {% endfor %}
             </tbody>
         </table>
     {% endif %}
+
 {% endblock %}

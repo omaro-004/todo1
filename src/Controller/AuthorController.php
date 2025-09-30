@@ -15,6 +15,7 @@ final class AuthorController extends AbstractController
             'controller_name' => 'AuthorController',
         ]);
     }
+
     #[Route('/authorName/{name?}', name: 'Show_author')]
     public function showAuthor($name): Response
     {
@@ -24,11 +25,9 @@ final class AuthorController extends AbstractController
 
     }
         
-    #[Route('/afficher', name: 'afficher')]
-    public function Afficher (): Response{
-        return new Response ("hello !!");
+    
 
-    }
+    
        
     
     #[Route('/authors', name: 'authors_list')]
@@ -44,6 +43,30 @@ public function list(): Response
         'authors' => $authors,
     ]);
 }
+
+#[Route('/authors/details/{id}', name: 'author_details')]
+public function authorDetails($id): Response
+{
+    $authors = [
+        ['id' => 1, 'picture' => 'assets/images/Victor-Hugo.jpg', 'username' => 'Victor Hugo', 'email' => 'victor.hugo@gmail.com', 'nb_books' => 100],
+        ['id' => 2, 'picture' => 'assets/images/william-shakespeare.jpg', 'username' => 'William Shakespeare', 'email' => 'william.shakespeare@gmail.com', 'nb_books' => 200],
+        ['id' => 3, 'picture' => 'assets/images/Taha_Hussein.jpg', 'username' => 'Taha Hussein', 'email' => 'taha.hussein@gmail.com', 'nb_books' => 300],
+    ];
+
+    $author = array_filter($authors, fn($a) => $a['id'] == $id);
+    $author = array_values($author)[0] ?? null;
+
+    if ($author) {
+        return $this->render('author/showAuthor.html.twig', [
+            'author' => $author,
+        ]);
+
+    }
+
+
+}
+
+
 
 
 
